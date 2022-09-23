@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class GameManagerX : MonoBehaviour
 {
+    Timer timer;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI gameOverText;
     public GameObject titleScreen;
@@ -21,7 +22,12 @@ public class GameManagerX : MonoBehaviour
     private float spaceBetweenSquares = 2.5f; 
     private float minValueX = -3.75f; //  x value of the center of the left-most square
     private float minValueY = -3.75f; //  y value of the center of the bottom-most square
-    
+
+    private void Start()
+    {
+        timer = GameObject.Find("Timer").GetComponent<Timer>();
+    }
+
     // Start the game, remove title screen, reset score, and adjust spawnRate based on difficulty button clicked
     public void StartGame(int difficulty)
     {
@@ -31,6 +37,9 @@ public class GameManagerX : MonoBehaviour
         score = 0;
         UpdateScore(0);
         titleScreen.SetActive(false);
+        //timer 
+        timer.timerText.gameObject.SetActive(true);
+        timer.StartTimer();
     }
 
     // While game is active spawn a random target
